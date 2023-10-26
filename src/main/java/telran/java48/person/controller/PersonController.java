@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import telran.java48.person.dto.AddressDto;
+import telran.java48.person.dto.ChildDto;
 import telran.java48.person.dto.CityPopulationDto;
+import telran.java48.person.dto.EmployeeDto;
 import telran.java48.person.dto.PersonDto;
 import telran.java48.person.service.PersonService;
 
@@ -32,7 +34,7 @@ public class PersonController {
 	}
 	
 	@DeleteMapping("/{id}")
-	PersonDto removePerson(Integer id) {
+	PersonDto removePerson(@PathVariable Integer id) {
 		return personService.removePerson(id);	
 	}
 	
@@ -65,4 +67,15 @@ public class PersonController {
 	Iterable<CityPopulationDto> getCitiesPopulation(){
 		return personService.getCitiesPopulation();
 	}
+	
+	@GetMapping("/children")
+	Iterable<ChildDto> findChildren(){
+		return personService.findChildren();
+	}
+	
+	@GetMapping("/salary/{minSalary}/{maxSalary}")
+	Iterable<EmployeeDto> findEmployeesBySalary(@PathVariable Integer minSalary, @PathVariable Integer maxSalary) {
+		return personService.findEmployeesBySalary(minSalary, maxSalary);
+	}
+	
 }
